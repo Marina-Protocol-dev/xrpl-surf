@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "marina-protocol"
+  },
+  "targets": {
+    "marina-protocol": {
+      "hosting": {
+        "home": [
+          "marina-protocol"
+        ],
+        "apidoc": [
+          "marina-protocol-api-doc"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

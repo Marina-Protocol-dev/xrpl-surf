@@ -1,0 +1,122 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"BooleanResponse": {
+				"properties": {
+					"result": {
+						"type": "boolean"
+					},
+					"error": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SurfTokenDto": {
+				"properties": {
+					"signedTransaction": {
+						"type": "string"
+					},
+					"amount": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"signedTransaction",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"fire_auth": {
+				"type": "http",
+				"scheme": "bearer"
+			},
+			"tsoa_auth": {
+				"type": "oauth2",
+				"flows": {
+					"implicit": {
+						"authorizationUrl": "http://swagger.io/api/oauth/dialog",
+						"scopes": {
+							"write:pets": "modify things",
+							"read:pets": "read things"
+						}
+					}
+				}
+			}
+		}
+	},
+	"info": {
+		"title": "Marina Protocol xrpl",
+		"version": "1.0",
+		"contact": {
+			"name": "marina-protocol",
+			"email": "master@marina-protocol.com",
+			"url": "https://marina-protocol.com"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/surftokens/issue": {
+			"post": {
+				"operationId": "Issue",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BooleanResponse"
+								}
+							}
+						}
+					}
+				},
+				"description": "Request to issue new surf tokens from cold wallet to hot wallet",
+				"tags": [
+					"SurfToken"
+				],
+				"security": [
+					{
+						"admin_auth": [
+							"level3"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "-",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SurfTokenDto",
+								"description": "-"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "https://asia-northeast3-marina-protocol.cloudfunctions.net/xrpl_v1"
+		}
+	]
+}
