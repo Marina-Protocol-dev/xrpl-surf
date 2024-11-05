@@ -7,7 +7,7 @@
 
 Please be aware that these functions are based on scenario-driven testing and have not yet been deployed in a production environment.
 
-## Architecture
+### Architecture
 
 ![Marina Protocol xrpl-surf](https://github.com/user-attachments/assets/4e16435f-d993-4f60-add3-dcfa482b4397)
 
@@ -54,4 +54,3 @@ This implementation covers core XRPL operations, including:
 - Validating XRP addresses
 
 These features enable the project to interact with the XRP Ledger for various token-related operations.
-
