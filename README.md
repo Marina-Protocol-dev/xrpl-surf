@@ -9,7 +9,7 @@ Please be aware that these functions are based on scenario-driven testing and ha
 
 ### Architecture
 
-![Marina Protocol xrpl-surf](https://github.com/user-attachments/assets/4e16435f-d993-4f60-add3-dcfa482b4397)
+![Marina Protocol xrpl-surf](https://github.com/user-attachments/assets/8d5c8fd2-40fb-46df-8dcd-04e24ff49c7a)
 
 ## XRPL Features Used in This Project
 
