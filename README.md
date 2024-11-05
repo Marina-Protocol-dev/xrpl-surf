@@ -7,6 +7,8 @@
 
 Please be aware that these functions are based on scenario-driven testing and have not yet been deployed in a production environment.
 
+## Architecture
+
 ## XRPL Features Used in This Project
 
 This project utilizes various features of the XRP Ledger (XRPL) to implement token issuance, transfer, and exchange functionality. Below is a summary of the XRPL features used and their locations in the codebase.
