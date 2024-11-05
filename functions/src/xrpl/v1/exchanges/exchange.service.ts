@@ -45,10 +45,10 @@ const ExchangeService = {
         };
       }
 
-      // 3. Check the SURF token balance of the hot wallet
-      const hotWallet = Wallet.fromSeed(process.env.HOT_WALLET_SEED!);
-      const hotWalletBalance = await client.getBalances(hotWallet.address);
-      const surfBalance = hotWalletBalance.find(
+      // 3. Check the SURF token balance of the perator wallet
+      const operator = Wallet.fromSeed(process.env.OPERATOR_WALLET_SEED!);
+      const operatorBalance = await client.getBalances(operator.address);
+      const surfBalance = operatorBalance.find(
         (b) => b.currency === process.env.SURF
       );
 
@@ -64,17 +64,17 @@ const ExchangeService = {
       // 4. Transfer SURF tokens and deduct pSurf
       const paymentTx: Payment = {
         TransactionType: "Payment",
-        Account: hotWallet.address,
+        Account: operator.address,
         Destination: walletAddress,
         Amount: {
           currency: process.env.SURF!,
-          issuer: hotWallet.address,
+          issuer: operator.address,
           value: amount.toString(),
         },
       };
 
       const paymentResult = await client.submitAndWait(paymentTx, {
-        wallet: hotWallet,
+        wallet: operator,
       });
 
       if (

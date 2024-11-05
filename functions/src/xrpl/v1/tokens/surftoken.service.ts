@@ -13,25 +13,25 @@ const SurfTokenService = {
     await client.connect();
 
     try {
-      const coldWallet = Wallet.fromSeed(process.env.COLD_WALLET_SEED!);
-      if (!coldWallet.verifyTransaction(dto.signedTransaction)) {
+      const issuer = Wallet.fromSeed(process.env.ISSUER_WALLET_SEED!);
+      if (!issuer.verifyTransaction(dto.signedTransaction)) {
         throw new Error("The signed transaction is not valid.");
       }
 
-      const hotWallet = Wallet.fromSeed(process.env.HOT_WALLET_SEED!);
+      const operator = Wallet.fromSeed(process.env.OPERATOR_WALLET_SEED!);
 
       const trustSetTx: TrustSet = {
         TransactionType: "TrustSet",
-        Account: hotWallet.address,
+        Account: operator.address,
         LimitAmount: {
           currency: process.env.SURF!,
-          issuer: coldWallet.address,
+          issuer: issuer.address,
           value: dto.amount.toString(),
         },
       };
 
       const trustSetResult = await client.submitAndWait(trustSetTx, {
-        wallet: hotWallet,
+        wallet: operator,
       });
 
       if (
@@ -43,17 +43,17 @@ const SurfTokenService = {
 
       const paymentTx: Payment = {
         TransactionType: "Payment",
-        Account: coldWallet.address,
-        Destination: hotWallet.address,
+        Account: issuer.address,
+        Destination: operator.address,
         Amount: {
           currency: process.env.SURF!,
-          issuer: coldWallet.address,
+          issuer: issuer.address,
           value: dto.amount.toString(),
         },
       };
 
       const paymentResult = await client.submitAndWait(paymentTx, {
-        wallet: coldWallet,
+        wallet: issuer,
       });
 
       if (
